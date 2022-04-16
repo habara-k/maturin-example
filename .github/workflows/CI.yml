@@ -1,0 +1,29 @@
+name: CI
+
+on:
+    push:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@2
+        with:
+          python-version: 3.9
+          architecture: x64
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          profile: minimal
+          default: true
+
+      - name: Publish
+        uses: messense/maturin-action@v1
+        with:
+          rust-toolchain: nightly
+          target: x86_64
+          command: publish
+          args: -u mjxproject -p ${{ secrets.PYPI_PASSWORD }}
