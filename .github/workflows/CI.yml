@@ -26,6 +26,6 @@ jobs:
           rust-toolchain: nightly
           target: x86_64
           command: publish
-          args: -u mjxproject
+          args: -u mjx-project
         env:
           MATURIN_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
